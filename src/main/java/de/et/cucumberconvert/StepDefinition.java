@@ -1,14 +1,14 @@
 package de.et.cucumberconvert;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author Erik
  */
-public class StepDefinition {
+class StepDefinition {
 
     private String type;
     private String regEx;
@@ -20,17 +20,10 @@ public class StepDefinition {
     }
 
     public static List<StepDefinition> fromStrings(List<String> methods) {
-        List<StepDefinition> stepDefinitions = new ArrayList<>();
-        for (String method : methods) {
-            stepDefinitions.add(fromString(method));
-        }
-        return stepDefinitions;
+        return methods.stream().map(StepDefinition::fromString).collect(Collectors.toList());
     }
 
-    /**
-     * for each method extract: method name, RegEx-String, List of Parameter names and types, and the body
-     */
-    public static StepDefinition fromString(String methodString) {
+    private static StepDefinition fromString(String methodString) {
         StepDefinition stepDefinition = new StepDefinition();
         Pattern pattern = Pattern.compile("(?:Given|When|Then|And|But)");
         Matcher matcher = pattern.matcher(methodString);

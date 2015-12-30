@@ -3,7 +3,7 @@ package de.et.cucumberconvert;
 /**
  * @author Erik
  */
-public class BracketUtil {
+class BracketUtil {
 
     static int matchingBracketPos(String content, int firstBracketPos) {
         int nestedBracketCount = 0;

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class TestStepConverter {
 
     private static File baseDir;
-    private String fileEnding;
+    private final String fileEnding;
 
     public static void main(String[] args) {
         if (args.length < 2) {
@@ -28,7 +28,7 @@ public class TestStepConverter {
         converter.convert();
     }
 
-    public TestStepConverter(String fileEnding, String basePath) {
+    private TestStepConverter(String fileEnding, String basePath) {
         this.fileEnding = fileEnding;
         baseDir = new File(basePath);
     }
@@ -68,7 +68,7 @@ public class TestStepConverter {
         String className = fileName.substring(0, fileName.indexOf('.'));
         String content = getFileContent(file);
 
-        String contentWithNewSteps = replaceContructorWithStepDefinitions(className, content);
+        String contentWithNewSteps = replaceConstructorWithStepDefinitions(className, content);
 
         if (contentWithNewSteps != null) {
             String java7Notation = replaceImports(contentWithNewSteps);
@@ -89,7 +89,7 @@ public class TestStepConverter {
         }
     }
 
-    private String replaceContructorWithStepDefinitions(String className, String content) {
+    private String replaceConstructorWithStepDefinitions(String className, String content) {
         Pattern constructorPattern = Pattern.compile("public " + className + "\\(\\) \\{");
         Matcher constructorMatcher = constructorPattern.matcher(content);
         if (!constructorMatcher.find()) {
