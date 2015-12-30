@@ -7,6 +7,7 @@ Converts Cucumber Test Steps between from Java 8 back to Java 7 notation.
 
 ##Run the program
 The program expects two arguments.
+
 1. The file ending of all files that should be converted
 2. The path that will recursively be searched for files with that ending
  
