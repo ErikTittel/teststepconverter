@@ -11,4 +11,4 @@ The program expects two arguments.
 1. The file ending of all files that should be converted
 2. The path that will recursively be searched for files with that ending
  
-`java -cp "target/*" de.et.cucumberconvert.TestStepConverter IT.java C:/dev/proj/teststepconverter/exampleMvnProject`
+`java -cp "target/*" de.et.cucumberconvert.TestStepConverter IT.java <yourpath>/teststepconverter/exampleMvnProject`
