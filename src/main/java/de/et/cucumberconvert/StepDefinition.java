@@ -38,12 +38,15 @@ class StepDefinition {
         if (!endOfFirstArgumentMatcher.find()) {
             return null;
         }
-        stepDefinition.regEx = methodString.substring(startOfFirstArgument, endOfFirstArgumentMatcher.end() + startOfFirstArgument - 1);
+        stepDefinition.regEx = methodString.substring(startOfFirstArgument, endOfFirstArgumentMatcher.end() +
+                startOfFirstArgument - 1);
         int posAfterFirstArgument = endOfFirstArgumentMatcher.end() + startOfFirstArgument + 1;
         String remainingMethodStringAfterRegEx = methodString.substring(posAfterFirstArgument);
         int startOfParameterGroup = remainingMethodStringAfterRegEx.indexOf('(');
-        int endOfParameterGroup = BracketUtil.matchingBracketPos(remainingMethodStringAfterRegEx, startOfParameterGroup);
-        stepDefinition.parameterGroup = remainingMethodStringAfterRegEx.substring(startOfParameterGroup, endOfParameterGroup + 1);
+        int endOfParameterGroup = BracketUtil.matchingBracketPos(remainingMethodStringAfterRegEx,
+                startOfParameterGroup);
+        stepDefinition.parameterGroup = remainingMethodStringAfterRegEx.substring(startOfParameterGroup,
+                endOfParameterGroup + 1);
         String remainingMethodStringAfterParameterGroup = remainingMethodStringAfterRegEx.substring
                 (endOfParameterGroup + 1);
         int startOfBody = remainingMethodStringAfterParameterGroup.indexOf('{');
@@ -60,7 +63,7 @@ class StepDefinition {
     private String generateMethodName(String regEx) {
         String simpleText = removeRegExFeatures(regEx);
         String normalizedText = removeIllegalCharacters(simpleText.toLowerCase());
-        String [] words = normalizedText.trim().split(" ");
+        String[] words = normalizedText.trim().split(" ");
         return concatenateInCamelCase(words);
     }
 
@@ -99,9 +102,9 @@ class StepDefinition {
         }
         StringBuilder result = new StringBuilder();
         result.append(text.charAt(startPos));
-        for(int i = startPos + 1; i < text.length(); i++) {
+        for (int i = startPos + 1; i < text.length(); i++) {
             char currentChar = text.charAt(i);
-            if(Character.isJavaIdentifierPart(currentChar)) {
+            if (Character.isJavaIdentifierPart(currentChar)) {
                 result.append(currentChar);
             } else if (result.charAt(result.length() - 1) != ' ') {
                 result.append(' ');
